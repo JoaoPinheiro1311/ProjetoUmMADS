@@ -209,52 +209,14 @@ armazem_C.adicionar_mercadoria("Sal", 40, 0.8, 1.0)
 armazem_C.adicionar_mercadoria("café", 50, 1.0, 1.5)
 armazem_C.adicionar_mercadoria("café", -10, .8, 1.5)
 
-
-'''     def remover_mercadoria(self, nome, quantidade):
-        if nome in self.stock and self.stock[nome]["quantidade"] >= quantidade:
-            self.stock[nome]["quantidade"] -= quantidade
-            if self.stock[nome]["quantidade"] == 0:
-                del self.stock[nome]
-            print(f"🗑️ {quantidade} unidades de {nome} removidas do {self.nome}.")
-        else:
-            print("❌ Erro: Quantidade insuficiente ou produto inexistente.") '''
-
 # Remoção de mercadoria
 armazem_A.remover_mercadoria("Latas", 10)
-
-'''   def transferir_mercadoria(self, destino, nome, quantidade):
-        if nome in self.stock and self.stock[nome]["quantidade"] >= quantidade:
-            destino.adicionar_mercadoria(nome, quantidade, self.stock[nome]["preço"], self.stock[nome]["peso"])
-            self.remover_mercadoria(nome, quantidade)
-        else:
-            print("❌ Erro: Transferência inválida.") '''
 
 # Transferência entre armazéns
 armazem_A.transferir_mercadoria(armazem_B, "Feijão", 10)
 armazem_B.transferir_mercadoria(armazem_C, "Açúcar", 20)
 
-''' def listar_armazens():
-   for armazem in armas:
-    print(armazem.nome) '''
-
 Armazem.listar_armazens()
-
-'''     def verificar_capacidade(self):
-        total = sum(produto["quantidade"] for produto in self.stock.values())
-        if total == self.capacidade:
-            print(f"⚠️ Aviso: O armazém '{self.nome}' atingiu a sua capacidade máxima.")
-            self.logs.append("Capacidade máxima atingida.")
-        elif total > self.capacidade:
-            print(f"⚠️ Aviso: O armazém '{self.nome}' ultrapassou a capacidade!")
-            self.logs.append("Capacidade ultrapassada.")
-        elif total >= self.capacidade * 0.9:
-            print(f"⚠️ Aviso: O armazém '{self.nome}' está a 90% da capacidade.")
-            self.logs.append("Capacidade a 90%.") '''
-
-'''     def mostrar_logs(self):
-        print(f"--- 📜 LOGS DO ARMAZÉM '{self.nome}' ---")
-        for log in self.logs:
-            print(log) '''
 
 # Criar armazém
 armazem_A = Armazem("A", 1000, 0, 0)
@@ -268,31 +230,7 @@ armazem_A.verificar_capacidade()
 # Mostrar logs
 armazem_A.mostrar_logs()
 
-'''     def custo_medio_produto(self, nome):
-        if nome in self.stock:
-            preco = self.stock[nome]["preço"]
-            print(f"💰 Custo médio de '{nome}' no armazém '{self.nome}': {preco:.2f}€")
-            return preco
-        else:
-            print(f"❌ Produto '{nome}' não encontrado no armazém '{self.nome}'.")
-            return None '''
-
 armazem_A.custo_medio_produto("Latas")
-
-'''     def valor_medio_venda_produto(self, nome):
-        if nome in self.stock:
-            # Calcular o preço médio de venda
-            qtd = self.stock[nome]["quantidade"]
-            preco_venda = self.stock[nome]["preço"]
-
-            # Valor médio de venda = preço médio * quantidade total
-            valor_medio_venda = preco_venda * qtd
-
-            print(f"💰 Valor médio de venda de '{nome}' no armazém '{self.nome}': {valor_medio_venda:.2f}€")
-            return valor_medio_venda
-        else:
-            print(f"❌ Produto '{nome}' não encontrado no armazém '{self.nome}'.")
-            return None '''
 
 # Adicionando mercadoria com preço de venda
 armazem_A.adicionar_mercadoria("Latas", 50, 2.0, 0.5)  # Preço de venda = 2.0€
@@ -301,29 +239,6 @@ armazem_B.adicionar_mercadoria("Latas", 50, 3.0, 0.5)  # Preço de venda = 3.0�
 
 # Calcular o valor médio de venda
 armazem_A.valor_medio_venda_produto("Latas")
-
-'''     def listar_produtos_maior_margem(self):
-        produtos_com_margem = []
-
-        for nome, info in self.stock.items():
-            preco_custo = info["preço"]
-            quantidade = info["quantidade"]
-
-            if "preço_venda" in info:
-                preco_venda = info["preço_venda"]
-                margem = ((preco_venda - preco_custo) / preco_venda) * 100
-                produtos_com_margem.append((nome, margem, quantidade))
-
-                # Guardar histórico
-                if nome not in self.historico_margens:
-                    self.historico_margens[nome] = []
-                self.historico_margens[nome].append(margem)
-
-        produtos_com_margem.sort(key=lambda x: x[1], reverse=True)
-
-        print(f"📊 --- Produtos com maior margem de lucro no armazém '{self.nome}' ---")
-        for nome, margem, quantidade in produtos_com_margem:
-            print(f"📈 Produto: {nome} | Margem: {margem:.2f}% | Quantidade: {quantidade}") '''
 
 # Adicionando mercadorias com preços de custo e de venda
 armazem_A.adicionar_mercadoria("Latas", 10, 2.0, 0.5)  # Preço de custo = 2.0€
@@ -334,16 +249,6 @@ armazem_A.stock["Peras"]["preço_venda"] = 5.5  # Preço de venda = 5.5€
 
 # Listar produtos com maior margem de lucro
 armazem_A.listar_produtos_maior_margem()
-
-'''     def alerta_quase_cheio(self):
-        total = sum(produto["quantidade"] for produto in self.stock.values())
-        if total >= self.capacidade * 0.9:
-            print(f"⚠️ Aviso: O armazém '{self.nome}' está a 90% da sua capacidade!")
-
-    def alerta_quase_vazio(self):
-        total = sum(produto["quantidade"] for produto in self.stock.values())
-        if total <= self.capacidade * 0.1:
-            print(f"⚠️ Aviso: O armazém '{self.nome}' está quase vazio (menos de 10% da capacidade).") '''
 
 # Adicionando mercadorias
 armazem_A.adicionar_mercadoria("Latas", 200, 2.0, 0.5)  # 40 unidades
@@ -362,55 +267,7 @@ armazem_A.alerta_quase_vazio()
 armazem_B.alerta_quase_cheio()
 armazem_B.alerta_quase_vazio()
 
-'''     def grafico_evolucao_margens(self):
-        if not self.historico_margens:
-            print("📉 Ainda não há histórico de margens.")
-            return
-
-        plt.figure(figsize=(10, 5))
-
-        for produto, margens in self.historico_margens.items():
-            plt.plot(margens, label=produto)
-
-        plt.title(f"📈 Evolução da Margem por Produto - Armazém {self.nome}")
-        plt.xlabel("Registos")
-        plt.ylabel("Margem (%)")
-        plt.legend()
-        plt.grid(True)
-        plt.tight_layout()
-        plt.show() '''
-
 armazem_A.listar_produtos_maior_margem()
 armazem_A.grafico_evolucao_margens()
 
-'''     def listar_armazens_mais_lucrativos():
-        if not armas:
-            print("❌ Não existem armazéns registados.")
-            return
-
-        lucros = []
-
-        armazens_filtrados = [armazem for armazem in armas if not armazem.nome.startswith("Armazém")]
-
-        for armazem in armazens_filtrados:
-            total_lucro = 0
-            for produto, info in armazem.stock.items():
-                if "preço_venda" in info:
-                    preco_custo = info["preço"]
-                    preco_venda = info["preço_venda"]
-                    quantidade = info["quantidade"]
-                    lucro = (preco_venda - preco_custo) * quantidade
-                    total_lucro += lucro
-            lucros.append((armazem.nome, total_lucro))
-
-        lucros.sort(key=lambda x: x[1], reverse=True)
-
-
-          print("\n💰 Armazéns mais lucrativos:")
-        for nome, lucro in lucros:
-            print(f"💵 - {nome}: {lucro:.2f}€ de lucro estimado")
-
- '''
-
 Armazem.listar_armazens_mais_lucrativos()
-
