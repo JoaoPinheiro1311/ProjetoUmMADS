@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='ProjetoUmMADS',
-    version='0.0.3',
+    version='0.0.5',
     author='JoaoPinheiro1311',
     author_email='a040698@ipmaia.pt',
     description='Projeto de MADS - Grupo 7 - Gestão de Stocks',
